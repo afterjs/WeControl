@@ -1,0 +1,3 @@
+-COR 1 | #202124
+-COR 2 | #babec3
+-cor 3 | #ea80fc
