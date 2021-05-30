@@ -1,0 +1,95 @@
+body {
+  background-image: url("../img/road.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.registerBox {
+  border-radius: 10px;
+  padding: 25px;
+  margin-top: 5%;
+  width: 30%;
+  border: 3.5px solid #4b6cbd !important;
+  box-shadow: 0 0 15px #4b6cbd !important;
+  background-color: #1c1d1e99;
+  -ms-transform: translateY(-50%);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.form-group img{
+  width: 60%;
+  height: 80%;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: white;
+  background-color: #0f0f0fd9;
+  background-clip: padding-box;
+  border: 1px solid #4b6cbd;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.50rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+  background-color: #000000d9;
+  border-color: #4b6cbd;
+  outline: 0;
+  color: white;
+  box-shadow: 0 0 15px #4b6cbd !important;
+}
+
+.calcImg {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 40%;
+}
+
+.btnRegistar {
+  width: 60%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgb(14, 10, 96, 1) 0%, rgb(128, 124, 211, 1) 50%, rgba(128, 124, 211, 1) 50%, rgba(14, 10, 96, 1) 100%);
+  color: white !important;
+  border: none;
+  font-family: Arial;
+  margin: 0 auto;
+  font-size: 1.4rem;
+  letter-spacing: 1.5px;
+  font-weight: bolder;
+}
+
+.btnRegistar:hover {
+  width: 60%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgb(14, 10, 96, 1) 0%, rgba(94, 136, 187, 1) 50%, rgba(94, 136, 187, 1) 50%, rgba(14, 10, 96, 1) 100%);
+  color: white !important;
+  border: none;
+  margin: 0 auto;
+  font-size: 1.4rem;
+  box-shadow: 0 0 10px #4b6cbd !important;
+}
+
+.labels {
+  color: white;
+  font-size: 1.4rem;
+  text-decoration-line: underline;
+  text-decoration-color: #4b6cbd;
+  margin-bottom: 3%;
+  text-underline-offset: 30%;
+  letter-spacing: 0.5px;
+  font-weight:500;
+}
