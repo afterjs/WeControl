@@ -14,12 +14,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Users.init({
-    nome: DataTypes.STRING,
-    password: DataTypes.STRING,
-    morada: DataTypes.STRING,
-    codPostal: DataTypes.STRING,
-    email: DataTypes.STRING,
-    idDepartamento: DataTypes.INTEGER
+    identificador: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    nome: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    idade: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    telemovel: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    email: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    username: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    password: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    tipo: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
+    cartas: {
+      allowNull: false,
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'Users',
