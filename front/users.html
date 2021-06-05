@@ -27,7 +27,11 @@
       <div class="header-mobile__bar">
         <div class="container-fluid">
           <div class="header-mobile-inner">
-            <a class="logo menu" data-pagina="" href="#"><img src="img/logo-01.png" alt="CoolAdmin" /></a>
+            <a class="logo menu" data-pagina="" href="#"><img src="img/logo-01.png" id="img-logo" class="img-logo" alt="Cool Admin" style="
+              margin-left: auto;
+              margin-right: auto;
+              display: block;
+          "></a>
             <button class="hamburger hamburger--slider" type="button">
               <span class="hamburger-box">
                   <span class="hamburger-inner"></span>
@@ -40,23 +44,17 @@
         <div class="container-fluid">
           <ul class="navbar-mobile__list list-unstyled">
             <li class="has-sub">
-              <a class="js-arrow" href="#">
-              <i class="fas fa-user-shield"></i>Admin <i class="fas fa-sort-down"></i></a>
-              <ul class="navbar-mobile-sub__list list-unstyled js-sub-list" id="adminMenu" style="display: none;">
-                <li>
-                  <a href="works.html" class="menu"><i class="fas fa-plus"></i>Gerir Trabalhos</a>
-                </li>
-                <li>
-                  <a href="users.html" class="menu"><i class="fas fa-plus"></i>Gerir Utilizadores</a>
-                </li>
-                <li>
-                  <a href="logs.html" class="menu"><i class="fas fa-id-card"></i>Logs</a>
-                </li>
-              </ul>
-            </li>
-            <li class="abrirSalasMenu">
-              <a href="worksUser.html" class="menu"><i class="fas fa-truck"></i>Ver Trabalhos</a>
-            </li>
+              <li>
+                <a href="works.html" class="menu"><i class="fas fa-plus"></i>Gerir Trabalhos</a>
+              </li>
+              <li>
+                <a href="users.html" class="menu"><i class="fas fa-plus"></i>Gerir Utilizadores</a>
+              </li>
+              <li>
+                <a href="logs.html" class="menu"><i class="fas fa-id-card"></i>Logs</a>
+              </li>
+          </li>
+
             <li>
               <a href="#" id="logout-btn" class="menu"><i class="fas fa-sign-out-alt"></i>Logout</a>
             </li>
@@ -69,8 +67,12 @@
 
     <aside class="menu-sidebar d-none d-lg-block">
       <div class="logo">
-        <a href="index.html" class="menu">
-         <img src="img/logo-01.png" id="img-logo" class="img-logo" alt="Cool Admin" />
+        <a href="users.html" class="menu">
+          <img src="img/logo-01.png" id="img-logo" class="img-logo" alt="Cool Admin" style="
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+      ">
       </a>
       </div>
       <div class="menu-sidebar__content js-scrollbar1">
@@ -79,25 +81,17 @@
          
           
             <li class="has-sub">
-              <a class="js-arrow" href="#">
-              <i class="fas fa-user-shield"></i>Admin<i class="fas fa-sort-down"></i></a>
-              <ul class="list-unstyled navbar__sub-list js-sub-list">
-                <li>
-                  <a href="works.html" class="menu"><i class="fas fa-plus"></i>Gerir Trabalhos</a>
-                </li>
-                <li>
-                  <a href="users.html" class="menu"><i class="fas fa-plus"></i>Gerir Utilizadores</a>
-                </li>
-                <li>
-                  <a href="logs.html" class="menu"><i class="fas fa-id-card"></i>Logs</a>
-                </li>
+              <li>
+                <a href="works.html" class="menu"><i class="fas fa-plus"></i>Gerir Trabalhos</a>
+              </li>
+              <li>
+                <a href="users.html" class="menu"><i class="fas fa-plus"></i>Gerir Utilizadores</a>
+              </li>
+              <li>
+                <a href="logs.html" class="menu"><i class="fas fa-id-card"></i>Logs</a>
+              </li>
+          </li>
 
-              </ul>
-            </li>
-            
-            <li class="abrirSalasMenu">
-              <a href="worksUser.html" class="menu"><i class="fas fa-truck"></i>Ver Trabalhos</a>
-            </li>
 
           </ul>
         </nav>
@@ -106,7 +100,7 @@
 
     <div class="page-container">
 
-      <header class="header-desktop">
+      <header class="header-desktop" id="header-desktop">
      
 
         <div class="section__content section__content--p30">
@@ -165,7 +159,9 @@
           <div class="container-fluid">
             <div class="row">
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="
+            text-align: center;
+        ">
               <div class="table-responsive table--no-card m-b-30">
                 
                 
@@ -278,49 +274,29 @@ $("#modalEdicaoCampos").on("input", function(){
   $("#atualizar").attr('disabled', false);
   console.log("a editar")
 });
-
+verificaTipo();
   verificaLogin();
   
-
+ //writeLog("bpoas npoites");
 
 
   $(document).ready(function() {
 
-
-    
-
-
+  let globalId;
    let t = $('#tableUser').DataTable();
    let table = $('#tableUser').DataTable();
    let btnApa = document.getElementById("apagar");
    let form = document.getElementById("formEditar");
    let btnAtl = document.getElementById("atualizar");
+   let headerWeb = document.getElementById("header-desktop");
 
+
+  let user = sessionStorage.getItem("username");
+  let id = sessionStorage.getItem("identificador");
+  let dataInfo;
+
+  
    getUsers();
-
-
- /*$('#tableUser').DataTable({
-          "language": {
-          "sProcessing":   "A processar...",
-          "sLengthMenu":   "Mostrar _MENU_ registos",
-          "sZeroRecords":  "Não foram encontrados resultados",
-          "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registos",
-          "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registos",
-          "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
-          "sInfoPostFix":  "",
-          "sSearch":       "Procurar:",
-          "sUrl":          "",
-            "oPaginate": {
-              "sFirst":    "Primeiro",
-              "sPrevious": "Anterior",
-              "sNext":     "Seguinte",
-              "sLast":     "Último"
-          }
-        }
-    });
-   */
-
-
 
    function getUsers() {
      axios.get('http://localhost:3000/user/', {
@@ -354,19 +330,18 @@ $("#modalEdicaoCampos").on("input", function(){
        });
 }
 
-let globalId;
+
 $('#tableUser').on('dblclick', 'tr', function () {
   $("#atualizar").attr('disabled', true);
   var id = table.row( this ).node().id;
   globalId = id;
-  axios.get('http://localhost:3000/user/'+id, {
+  axios.get('http://localhost:3000/user/' + id, {
           headers: {
                'Authorization': sessionStorage.getItem("token"),
                'Content-Type': 'application/json'
           },
       })
         .then(response => { 
-          console.log(response.data)
                document.getElementById("nomeEdit").value = response.data.nome;
                document.getElementById("cartasEdit").value = response.data.cartas;
                document.getElementById("idadeEdit").value = response.data.idade;
@@ -390,23 +365,31 @@ btnApa.addEventListener("click", function () {
             },
         })
           .then(response => { 
+              dataInfo = "O admin " + user + " | " + id + " apagou o utilizador nº" + globalId;
+              writeLog(dataInfo);
               $('#mdlDados').modal('hide'); 
               const alert = document.createElement("div");
               alert.classList.add("alert", "alert-success");
               alert.innerText = "Conta Apagada.";
               alert.id = "alert"
-              form.prepend(alert);
+              headerWeb.prepend(alert);
               setTimeout(function() {
                   document.getElementById("alert").remove();
                   window.location.replace("users.html");
               }, 2500)
           })
           .catch(function (error) {
-              console.log(error);
+              const alert = document.createElement("div");
+              alert.classList.add("alert", "alert-danger");
+              alert.innerText = "Ocorreu um erro.";
+              alert.id = "alert"
+              headerWeb.prepend(alert);
+              setTimeout(function() {
+                  document.getElementById("alert").remove();
+                //  window.location.replace("users.html");
+              }, 2500)
           })
-          .then(function () {
-              // always executed
-          });
+          
 
 })
 
@@ -438,28 +421,32 @@ btnAtl.addEventListener("click", function () {
     })
 
     .then((res) => {
+      dataInfo = "O admin " + user + " | " + id + " atualizou o utilizador " + formData.get("nomeEdit");
+      writeLog(dataInfo);
       $('#mdlDados').modal('hide'); 
       const alert = document.createElement("div");
       alert.classList.add("alert", "alert-success");
       alert.innerText = "Dados Atualizados.";
       alert.id = "alert"
-      form.prepend(alert);
+      headerWeb.prepend(alert);
       setTimeout(function() {
           document.getElementById("alert").remove();
           window.location.replace("users.html");
       }, 2500)
     })
     .catch((error) => {
-        console.log("Error");
+      const alert = document.createElement("div");
+        alert.classList.add("alert", "alert-danger");
+        alert.innerText = "Ocorreu um erro.";
+        alert.id = "alert"
+        headerWeb.prepend(alert);
+        setTimeout(function() {
+            document.getElementById("alert").remove();
+            window.location.replace("users.html");
+        }, 2500)
     });
 
-
-   
-
 })
-
-
-
 
 });
 

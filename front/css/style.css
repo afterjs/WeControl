@@ -1,7 +1,6 @@
 .buton-sub {
   color: #fff;
   background-color: #e7422d;
-  border-radius: 10px;
 }
 
 .nome-menu {
@@ -95,4 +94,18 @@ th {
   color: #fff;
   background-color: #440a03;
   border-color: #8a2113;
+}
+
+.alert {
+  position: relative;
+  padding: 1.48rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.buton-sub:hover {
+  color: #fff;
+  background-color: #580000;
+  border-radius: 10px;
 }

@@ -1,4 +1,7 @@
-let nome;
+
+let username;
+let identificador;
+
 let form = document.getElementById("form-login");
 
 form.addEventListener("submit", function () {
@@ -14,17 +17,28 @@ form.addEventListener("submit", function () {
       headers: { "Content-Type": "application/json" },
     })
     .then((response) => {
-      console.log(response.data);
-      sessionStorage.setItem("token", "Bearer " + response.data.token);
-      nome = "agaawha";
-      const alert = document.createElement("div");
+          sessionStorage.setItem("token", "Bearer " + response.data.token);
+          sessionStorage.setItem("username", response.data.info.username);
+          sessionStorage.setItem("identificador", response.data.info.identificador);
+          sessionStorage.setItem("tipo", response.data.info.tipo);
+          sessionStorage.setItem("nome", response.data.info.nome);
+
+          let dataInfo;
+          dataInfo = "O utilizador " + response.data.info.username + " | " + response.data.info.identificador + " fez login.";
+          writeLog(dataInfo);
+
+          const alert = document.createElement("div");
           alert.classList.add("alert", "alert-success");
           alert.innerText = "Login Efetuado.";
           alert.id = "alert"
           form.prepend(alert);
           setTimeout(function() {
               document.getElementById("alert").remove();
-              window.location.replace("users.html");
+              if(sessionStorage.getItem("tipo") === "admin") {
+                window.location.replace("works.html");
+              } else {
+                window.location.replace("worksUser.html");
+              }
           }, 1000)
     })
     .catch((error) => {
@@ -38,15 +52,22 @@ form.addEventListener("submit", function () {
               window.location.replace("login.html");
           }, 1000)
     });
+    
 });
 
+function writeLog(info) {
 
+    let dataString = {"info": info};
+    let data = JSON.stringify(dataString);
 
-function writeLog(dataLog) {
-
-
-    console.log(nome)
-
-
+    axios.post("http://localhost:3000/log/newLog", data, {
+        headers: { 
+          'Authorization': sessionStorage.getItem("token"),
+          "Content-Type": "application/json" },
+    }).then((res) => {
+      console.log(res);
+    }).catch((error) => {
+      console.log(error);
+    });
 
 }

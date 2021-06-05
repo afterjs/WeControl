@@ -1684,9 +1684,10 @@ function verPassword() {
   }
 }
 
-/* -------------------------------Confirmar Password---------------------------------------*/
-/*
-var password = document.getElementById("password"),
+
+
+
+/*var password = document.getElementById("password"),
   confirm_password = document.getElementById("confirm_password");
 
 function validatePassword() {
@@ -1698,21 +1699,29 @@ function validatePassword() {
 }
 
 password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;*/
+confirm_password.onkeyup = validatePassword;
 
-
+*/
 
 function verificaLogin() {
-
   if(sessionStorage.getItem("token") === null) {
     window.location.replace("login.html");
   } 
-
 }
 
-
 function logout() {
-  sessionStorage.removeItem("token")
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("username")
+  sessionStorage.removeItem("nome");
+  sessionStorage.removeItem("tipo");
+  sessionStorage.removeItem("identificador");
   window.location.replace("login.html");
 }
 
+function verificaTipo() {
+
+  if(sessionStorage.getItem("tipo") !== "admin") {
+      window.location.replace("worksUser.html");
+  }
+
+}

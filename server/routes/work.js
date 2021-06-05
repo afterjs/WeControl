@@ -12,6 +12,6 @@ router.patch('/:idAuto', checkAuthMiddleWare.checkAuth, workController.update);
 router.delete('/:idAuto', checkAuthMiddleWare.checkAuth, workController.destroy);
 router.get('/', checkAuthMiddleWare.checkAuth, workController.getAll)
 router.get('/:identificador', checkAuthMiddleWare.checkAuth, workController.getById);
-
+router.get('/pk/:idAuto', checkAuthMiddleWare.checkAuth, workController.getByIdPK);
 
 module.exports = router;

@@ -111,7 +111,6 @@ function login(req, res) {
     .then((response) => {
 
         if(response === null) {
-            console.log("cona");
             res.status(401).json({
                 message: "Cradenciais invalidas!"
             });
@@ -120,17 +119,19 @@ function login(req, res) {
             bcrypt.compare(req.body.password, response.password).then(function(result) {
 
                 if(result === true) {
-                    console.log("cona 1");
-                    const token = jwt.sign(
-                        { email: response.email }, 'chaveUltraSecreta',
+                    const token = jwt.sign({ 
+                        exp: Math.floor(5),
+                        email: response.email,
+                        }, 'chaveUltraSecreta',
                         function(err, token) {
                             res.status(201).json({
                                 message: "Autenticação com sucesso!",
-                                token
+                                token,
+                                info: response
+                                
                             });
                         });
                 } else {
-                    console.log("cona");
                     res.status(401).json({
                         message: "Cradenciais invalidas!"
                     });

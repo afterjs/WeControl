@@ -8,6 +8,7 @@ function addWorker(req, res) {
 
         const workSchema = {
             identificador: req.body.identificador,
+            nome: req.body.nome,
             camiao: req.body.camiao,
             matricula: req.body.matricula,
             docaInicial: req.body.docaInicial,
@@ -19,6 +20,7 @@ function addWorker(req, res) {
     
         const schema = {
             identificador: {type:"number", optional: false, max: "255"},
+            nome: {type:"string", optional: false, max: "255"},
             camiao: {type:"string", optional: false, max: "255"},
             matricula: {type:"string", optional: false, max: "255"},
             docaInicial: {type:"string", optional: false, max: "255"},
@@ -27,12 +29,14 @@ function addWorker(req, res) {
             klmFinal: {type:"string", optional: true, max: "255"},
             estado: {type:"string", optional: false, max: "255"},     
         }
+
     
         const v = new Validator();
         const vResponse = v.validate(workSchema , schema);
     
     
         if(vResponse !== true) {
+            console.log("Problemas na validacao")
             return res.status(400).json({
             message: "Problema de validação",
             errors: vResponse
@@ -41,13 +45,15 @@ function addWorker(req, res) {
 
         models.Works.create(workSchema)
         .then((result) => {
-         res.status(201).json({
+            console.log("entrou aqui")
+         res.status(200).json({
              message: "Criado com sucesso",
              work: result
          });
      
         })
         .catch((error) => {
+            console.log("problemas aqui")
             res.status(500).json({
                 message: "problemas ao inserir trabalho",
                 error
@@ -60,6 +66,7 @@ function update(req, res) {
 
     const updateWork = {
             identificador: req.body.identificador,
+            nome: req.body.nome,
             camiao: req.body.camiao,
             matricula: req.body.matricula,
             docaInicial: req.body.docaInicial,
@@ -140,7 +147,36 @@ function getById(req, res) {
     
     const identificador = req.params.identificador;
 
-    models.Works.findAll({where: {identificador: identificador}})
+    models.Works.findAll({where: {identificador:identificador}})
+    .then((result) => {
+        if(result) {
+            res.status(200).json(result);
+
+            console.log(result)
+        } else {
+            console.log("nao existe")
+            res.status(404).json({
+                message: "ID INEXISTENTE",
+                error
+            });
+        }
+        
+    })
+    .catch((error) => {
+        res.status(500).json({
+            message: "Problemas no servidor",
+            error
+        });
+    })
+}
+
+
+
+function getByIdPK(req, res) {
+    
+    const idAuto = req.params.idAuto;
+
+    models.Works.findByPk(idAuto)
     .then((result) => {
         if(result) {
             res.status(200).json(result);
@@ -160,11 +196,17 @@ function getById(req, res) {
     })
 }
 
+
+
+
+
+
 module.exports = {
     addWorker,
     update,
     destroy,
     getById,
-    getAll
+    getAll,
+    getByIdPK
    
 }

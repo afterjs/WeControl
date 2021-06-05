@@ -14,7 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Logs.init({
-    idAuto: DataTypes.INTEGER,
+
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     info: DataTypes.STRING,
     data: DataTypes.DATE
   }, {
