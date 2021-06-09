@@ -250,10 +250,10 @@
 
               <div class="form-group col-md-4">
                 <label class="letra-preta">Estado</label>
-                <select name="estadoEdit" id="estadoEdit"class="form-control selectpicker" onchange="enableBTN()" multiple>                   
+                <select name="estadoEdit" id="estadoEdit" class="form-control" onchange="enableBTN()">                                  
                   <option value="entregue">ENTREGUE</option>    
                   <option value="carregamento">EM CARREGAMENTO</option>  
-                  <option value="movimento">MOVIMENTO</option>  
+                  <option value="movimento">MOVIMENTO</option> 
                 </select>
               </div>
               
@@ -363,7 +363,7 @@ $('#tableUser').on('dblclick', 'tr', function () {
   $("#atualizar").attr('disabled', true);
   var id = table.row( this ).node().id;
   globalId = id;
-  axios.get('http://localhost:3000/work/'+id, {
+  axios.get('http://localhost:3000/work/pk/'+id, {
           headers: {
                'Authorization': sessionStorage.getItem("token"),
                'Content-Type': 'application/json'
@@ -409,7 +409,7 @@ btnApa.addEventListener("click", function () {
               setTimeout(function() {
                   document.getElementById("alert").remove();
                   window.location.replace("works.html");
-              }, 2500)
+              }, 1000)
           })
           .catch(function (error) {
             const alert = document.createElement("div");
@@ -420,7 +420,7 @@ btnApa.addEventListener("click", function () {
   setTimeout(function() {
       document.getElementById("alert").remove();
       window.location.replace("works.html");
-  }, 2500)
+  }, 1000)
           })
           .then(function () {
               // always executed
@@ -436,7 +436,7 @@ event.preventDefault();
 let formData = new FormData(form);
 
     let dataString = {
-      "estado": formData.get("estadoEdit"),
+      "estado": $("#estadoEdit").val(),
       "klmFinal": formData.get("klmFinalEdit"),
 
     };
@@ -465,7 +465,7 @@ axios.patch("http://localhost:3000/work/" + globalId, data, {
   setTimeout(function() {
       document.getElementById("alert").remove();
       window.location.replace("works.html");
-  }, 2500)
+  }, 1000)
 })
 .catch((error) => {
   const alert = document.createElement("div");
@@ -476,7 +476,7 @@ axios.patch("http://localhost:3000/work/" + globalId, data, {
   setTimeout(function() {
       document.getElementById("alert").remove();
       window.location.replace("works.html");
-  }, 2500)
+  }, 1000)
 });
 
 })

@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 
 
-
 function checkAuth(req, res, next) {
  
     try {

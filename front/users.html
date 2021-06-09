@@ -115,7 +115,7 @@
                     </div>
                     <div class="nome-menu">
                       <a>
-                       ricardo
+                       Administração
                       </a>
                     <!-- <i class="fas fa-sms fa-2x" style="color: red;" aria-hidden="true"></i>-->
                       <i class="fas fa-sort-down"></i>
@@ -130,10 +130,10 @@
                         <div class="content">
                           <h5 class="name">
                             <a href="#">
-                              ricardo
+                              Administração
                             </a>
                           </h5>
-                          <span class="email">ricardoamarp</span>
+                          <span class="email"></span>
                         </div>
                       </div>
 
@@ -376,7 +376,7 @@ btnApa.addEventListener("click", function () {
               setTimeout(function() {
                   document.getElementById("alert").remove();
                   window.location.replace("users.html");
-              }, 2500)
+              }, 1500)
           })
           .catch(function (error) {
               const alert = document.createElement("div");
@@ -386,8 +386,8 @@ btnApa.addEventListener("click", function () {
               headerWeb.prepend(alert);
               setTimeout(function() {
                   document.getElementById("alert").remove();
-                //  window.location.replace("users.html");
-              }, 2500)
+                  window.location.replace("users.html");
+              }, 1500)
           })
           
 
@@ -432,7 +432,7 @@ btnAtl.addEventListener("click", function () {
       setTimeout(function() {
           document.getElementById("alert").remove();
           window.location.replace("users.html");
-      }, 2500)
+      }, 1000)
     })
     .catch((error) => {
       const alert = document.createElement("div");
@@ -443,7 +443,7 @@ btnAtl.addEventListener("click", function () {
         setTimeout(function() {
             document.getElementById("alert").remove();
             window.location.replace("users.html");
-        }, 2500)
+        }, 1000)
     });
 
 })

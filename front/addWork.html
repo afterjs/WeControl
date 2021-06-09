@@ -111,7 +111,7 @@
                     </div>
                     <div class="nome-menu">
                       <a>
-                       ricardo
+                       Administração
                       </a>
                     <!-- <i class="fas fa-sms fa-2x" style="color: red;" aria-hidden="true"></i>-->
                       <i class="fas fa-sort-down"></i>
@@ -126,10 +126,10 @@
                         <div class="content">
                           <h5 class="name">
                             <a href="#">
-                              ricardo
+                              Administração
                             </a>
                           </h5>
-                          <span class="email">ricardoamarp</span>
+                          <span class="email"></span>
                         </div>
                       </div>
 
@@ -171,20 +171,21 @@
                         <label class="letra-preta" style="border-bottom: 2px solid #e7422d;">Dados Camião</label>
         
                         <div class="form-row">
-                          <div class="form-group col-md-3">
-                            <label class="letra-preta">Identificador<span style="color:#e7422d">*</span></label>
-                            <input type="number" class="form-control" name="identificador" id="identificador" placeholder="234123" required autofocus>
-                          </div>
-                          <div class="form-group col-md-3">
-                            <label class="letra-preta">Nome<span style="color:#e7422d">*</span></label>
-                            <input type="text" class="form-control" name="nome" id="nome" placeholder="234123" required autofocus>
+
+
+                          <div class="form-group col-md-4">
+                            <label class="letra-preta">Funcionario<span style="color:#e7422d">*</span></label>
+                            
+                           <select name="selectFunc"  id="selectFunc" class="form-control">                   
+                           </select>
+
                           </div>
         
-                          <div class="form-group col-md-3">
+                          <div class="form-group col-md-4">
                             <label class="letra-preta">Camião<span style="color:#e7422d">*</span></label>
                             <input type="text" class="form-control" name="camiao" id="camiao" placeholder="Scania" required>
                           </div>
-                          <div class="form-group col-md-3">
+                          <div class="form-group col-md-4">
                             <label class="letra-preta">Matirucla<span style="color:#e7422d">*</span></label>
                             <input type="text" class="form-control" name="matricula" id="matricula" placeholder="XXYYZZ" required>
                           </div>
@@ -223,10 +224,10 @@
                           <div class="form-group col-md-4">
                             <label class="letra-preta">Estado<span style="color:#e7422d">*</span></label>
                             
-                           <select name="estado" class="form-control selectpicker" multiple>                   
+                            <select name="estado"  id="estado" class="form-control">                                  
                             <option value="entregue">ENTREGUE</option>    
                             <option value="carregamento">EM CARREGAMENTO</option>  
-                            <option value="movimento">MOVIMENTO</option>  
+                            <option value="movimento">MOVIMENTO</option> 
                           </select>
                           </div>
         
@@ -260,8 +261,6 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
-   verificaTipo();
-verificaLogin();
 
 let headerWeb = document.getElementById("header-desktop");
 let addUserForm = document.getElementById("add-work");
@@ -269,23 +268,64 @@ let user = sessionStorage.getItem("username");
 let id = sessionStorage.getItem("identificador");
 let dataInfo;
 
+verificaTipo();
+verificaLogin();
+getUtilizadores();
+
+
+  function getUtilizadores() {
+     axios.get('http://localhost:3000/user/', {
+         headers: {
+             //Adicionar a Authorization se for necessário e a API estiver bloqueada pelo middleware
+              'Authorization': sessionStorage.getItem("token"),
+              'Content-Type': 'application/json'
+         },
+     })
+       .then(response => {         
+           $.each(response.data, function(i, u) {
+            newOption(u.nome, u.identificador)
+           });
+
+       })
+       .catch(function (error) {
+          
+           console.log(error);
+       })
+       .then(function () {
+           // always executed
+       });
+}
+
+function newOption(name, identificador) {
+    let sel = document.getElementById('selectFunc');
+    var opt = document.createElement('option');
+    opt.append(document.createTextNode(name + " | ID " + identificador));
+    opt.value = name;
+    opt.id = identificador; 
+    sel.append(opt);
+}
+
+
 addUserForm.addEventListener("submit", function () {
     event.preventDefault();
     let formData = new FormData(addUserForm);
 
+    var identificador = $("#selectFunc").children(":selected").attr("id");
     let dataString = {
-      "identificador": parseInt(formData.get("identificador")),
-      "nome": formData.get("nome"),
+      "identificador": parseInt(identificador),
+      "nome": $("#selectFunc").val(),
       "camiao": formData.get("camiao"),
       "matricula": formData.get("matricula"),
       "docaInicial": formData.get("docaInicial"),
       "docaFinal": formData.get("docaFinal"),
       "klmInicial": formData.get("klmInicial"),
       "klmFinal": formData.get("klmFinal"),
-      "estado": formData.get("estado"),
+      "estado": $("#estado").val(),
     };
     
     let data = JSON.stringify(dataString);
+
+    console.log(data)
 
     axios.post("http://localhost:3000/work/addWork", data, {
         headers: { 
@@ -307,7 +347,7 @@ addUserForm.addEventListener("submit", function () {
       setTimeout(function() {
           document.getElementById("alert").remove();
           window.location.replace("works.html");
-      }, 1000)
+      }, 1500)
     })
     .catch((error) => {
       const alert = document.createElement("div");
@@ -318,7 +358,7 @@ addUserForm.addEventListener("submit", function () {
           setTimeout(function() {
               document.getElementById("alert").remove();
               window.location.replace("works.html");
-          }, 1000)
+          }, 1500)
     });
 
   

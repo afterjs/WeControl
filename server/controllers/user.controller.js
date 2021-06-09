@@ -27,6 +27,8 @@ function register(req, res) {
             tipo: {type:"string", optional: false, max: "255"},
             cartas: {type:"string", optional: false, max: "255"}
         }
+
+    
     
         const v = new Validator();
         const vResponse = v.validate(userSchema , schema);
@@ -120,7 +122,7 @@ function login(req, res) {
 
                 if(result === true) {
                     const token = jwt.sign({ 
-                        exp: Math.floor(5),
+                      //  exp: Math.floor(5),
                         email: response.email,
                         }, 'chaveUltraSecreta',
                         function(err, token) {
