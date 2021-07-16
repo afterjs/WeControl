@@ -1703,6 +1703,23 @@ confirm_password.onkeyup = validatePassword;
 
 */
 
+function writeLog(info) {
+
+    let dataString = {"info": info};
+    let data = JSON.stringify(dataString);
+
+    axios.post("http://localhost:3000/log/newLog", data, {
+        headers: { 
+          'Authorization': sessionStorage.getItem("token"),
+          "Content-Type": "application/json" },
+    }).then((res) => {
+      console.log(res);
+    }).catch((error) => {
+      console.log(error);
+    });
+
+}
+
 function verificaLogin() {
   if(sessionStorage.getItem("token") === null) {
     window.location.replace("login.html");
