@@ -1,7 +1,6 @@
-# WeControl - School Work
-* This site was a college assignment where we had to create a rest api in NODEJS along with ORM Sequelize, Express, Json Web Token and MySQL.
+# WeControl - School Work REST API
+* This project was a college assignment where we had to create a rest api in NODEJS along with ORM Sequelize, Express, Json Web Token and MySQL.
 
-*I am not validating the session on the client side, I just use protection for the API. I made some redirects with javascript checking if there is a token in my local storage :)*
 
 
 # Dependencies
